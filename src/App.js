@@ -4,8 +4,8 @@ import PhoneForm from "./components/PhoneForm";
 import PhoneInfoList from "./components/PhoneInfoList";
 
 class App extends Component {
-  id = 2;
   state = {
+    id: 2,
     information: [
       { id: 0, name: "DK", phone: "714-600-4308" },
       {
@@ -13,16 +13,18 @@ class App extends Component {
         name: "Hannah",
         phone: "714-328-8616"
       }
-    ]
+    ],
+    keyword: ""
   };
 
   handleCreate = data => {
     const { information } = this.state;
     this.setState({
       information: information.concat({
-        id: this.id++,
+        id: this.state.id,
         ...data
-      })
+      }),
+      id: this.state.id + 1
     });
   };
 
@@ -42,13 +44,48 @@ class App extends Component {
     });
   };
 
+  handleChange = e => {
+    const { value } = e.target;
+    this.setState({
+      keyword: value
+    });
+  };
+
+  UNSAFE_componentWillMount = () => {
+    const contactD = localStorage.contactData;
+    if (contactD) {
+      this.setState({
+        information: JSON.parse(contactD),
+        id: JSON.parse(contactD).length
+      });
+    }
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      JSON.stringify(prevState.information) !==
+      JSON.stringify(this.state.information)
+    ) {
+      localStorage.contactData = JSON.stringify(this.state.information);
+    }
+  };
+
   render() {
-    const { information } = this.state;
+    const { information, keyword } = this.state;
+    const filteredList = information.filter(
+      item => item.name.toLowerCase().indexOf(keyword) > -1
+    );
+
     return (
       <div>
         <PhoneForm onCreate={this.handleCreate} />
+        <input
+          placeholder="Search"
+          value={this.state.keyword}
+          onChange={this.handleChange}
+        />
         <PhoneInfoList
-          data={information}
+          data={filteredList}
           onRemove={this.handleRemove}
           onUpdate={this.handleUpdate}
         />

@@ -15,6 +15,16 @@ export default class PhoneInfo extends Component {
     phone: ""
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      !this.state.editing &&
+      !nextState.editing &&
+      nextProps.info === this.props.info
+    ) {
+      return false;
+    }
+    return true;
+  }
   handleRemove = () => {
     const {
       info: { id },
@@ -56,6 +66,7 @@ export default class PhoneInfo extends Component {
   }
 
   render() {
+    console.log("render PhoneInfo " + this.props.info.id);
     const style = {
       border: "2px solid grey",
       padding: "8px",
