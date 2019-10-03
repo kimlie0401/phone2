@@ -15,6 +15,7 @@ class App extends Component {
       }
     ]
   };
+
   handleCreate = data => {
     const { information } = this.state;
     this.setState({
@@ -25,11 +26,19 @@ class App extends Component {
     });
   };
 
+  handleRemove = id => {
+    const { information } = this.state;
+    this.setState({
+      information: information.filter(item => item.id !== id)
+    });
+  };
+
   render() {
+    const { information } = this.state;
     return (
       <div>
         <PhoneForm onCreate={this.handleCreate} />
-        <PhoneInfoList data={this.state.information} />
+        <PhoneInfoList data={information} onRemove={this.handleRemove} />
       </div>
     );
   }
