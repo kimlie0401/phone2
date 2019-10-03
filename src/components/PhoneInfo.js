@@ -9,7 +9,11 @@ export default class PhoneInfo extends Component {
     }
   };
   render() {
-    const style = { border: "1px solid black", padding: "8px", margin: "8px" };
+    const style = {
+      border: "2px solid grey",
+      padding: "8px",
+      margin: "15px"
+    };
     const { name, phone, id } = this.props.info;
     return (
       <div style={style}>
