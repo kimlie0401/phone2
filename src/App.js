@@ -77,18 +77,24 @@ class App extends Component {
     );
 
     return (
-      <div>
-        <PhoneForm onCreate={this.handleCreate} />
-        <input
-          placeholder="Search"
-          value={this.state.keyword}
-          onChange={this.handleChange}
-        />
-        <PhoneInfoList
-          data={filteredList}
-          onRemove={this.handleRemove}
-          onUpdate={this.handleUpdate}
-        />
+      <div className="main">
+        <div className="title">Phone List</div>
+        <div className="form-wrapper">
+          <PhoneForm onCreate={this.handleCreate} />
+          <input
+            className="search"
+            placeholder="Search"
+            value={this.state.keyword}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="phoneList-wrapper">
+          <PhoneInfoList
+            data={filteredList}
+            onRemove={this.handleRemove}
+            onUpdate={this.handleUpdate}
+          />
+        </div>
       </div>
     );
   }

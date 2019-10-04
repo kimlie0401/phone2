@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./PhoneForm.css";
 
 export default class PhoneForm extends Component {
   state = { name: "", phone: "" };
@@ -20,21 +21,23 @@ export default class PhoneForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          placeholder="Name"
-          name="name"
-          value={this.state.name}
-          onChange={this.handleChange}
-        />
-        <input
-          placeholder="Phone"
-          name="phone"
-          value={this.state.phone}
-          onChange={this.handleChange}
-        />
-        <button type="submit">Create</button>
-      </form>
+      <div className="form">
+        <form onSubmit={this.handleSubmit}>
+          <input
+            placeholder="Name"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <input
+            placeholder="Phone"
+            name="phone"
+            value={this.state.phone}
+            onChange={this.handleChange}
+          />
+          <button type="submit">Create</button>
+        </form>
+      </div>
     );
   }
 }

@@ -68,9 +68,9 @@ export default class PhoneInfo extends Component {
   render() {
     console.log("render PhoneInfo " + this.props.info.id);
     const style = {
-      border: "2px solid grey",
+      border: "2px solid #348dc0",
       padding: "8px",
-      margin: "15px"
+      margin: "10px"
     };
     const { editing } = this.state;
 
